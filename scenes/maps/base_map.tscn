@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://1iuc84vq5o3r"]
+
+[ext_resource type="PackedScene" uid="uid://bjqw46733fxs7" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://dm78k3qtcsslc" path="res://scenes/camera/orbit_camera.tscn" id="2_camera"]
+[ext_resource type="PackedScene" uid="uid://deul0ocl6q85i" path="res://scenes/menus/pause_menu.tscn" id="3_pause"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.044, 0.0642, 0.116, 1)
+sky_horizon_color = Color(0.162, 0.254, 0.338, 1)
+ground_bottom_color = Color(0.064, 0.0768, 0.096, 1)
+ground_horizon_color = Color(0.162, 0.254, 0.338, 1)
+
+[sub_resource type="Sky" id="Sky_world"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_world"]
+background_mode = 2
+sky = SubResource("Sky_world")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tile_light"]
+albedo_color = Color(0.264, 0.301, 0.336, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tile_light"]
+material = SubResource("StandardMaterial3D_tile_light")
+size = Vector3(0.95, 0.2, 0.95)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tile_dark"]
+albedo_color = Color(0.194, 0.221, 0.246, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tile_dark"]
+material = SubResource("StandardMaterial3D_tile_dark")
+size = Vector3(0.95, 0.2, 0.95)
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_tiles"]
+item/0/name = "tile_light"
+item/0/mesh = SubResource("BoxMesh_tile_light")
+item/1/name = "tile_dark"
+item/1/mesh = SubResource("BoxMesh_tile_dark")
+
+[node name="base_map" type="Node3D"]
+
+[node name="world_environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_world")
+
+[node name="directional_light_3d" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.6, 0.7155418, -0.3577709, 0, 0.4472136, 0.8944272, 0.8, -0.53665626, 0.26832816, 0, 0, 0)
+
+[node name="grid_map" type="GridMap" parent="."]
+mesh_library = SubResource("MeshLibrary_tiles")
+cell_size = Vector3(1, 0.2, 1)
+data = {
+"cells": PackedInt32Array(-5, 65531, 0, -5, 65532, 1, -5, 65533, 0, -5, 65534, 1, -5, 65535, 0, -5, 0, 1, -5, 1, 0, -5, 2, 1, -5, 3, 0, -5, 4, 1, -4, 65531, 1, -4, 65532, 0, -4, 65533, 1, -4, 65534, 0, -4, 65535, 1, -4, 0, 0, -4, 1, 1, -4, 2, 0, -4, 3, 1, -4, 4, 0, -3, 65531, 0, -3, 65532, 1, -3, 65533, 0, -3, 65534, 1, -3, 65535, 0, -3, 0, 1, -3, 1, 0, -3, 2, 1, -3, 3, 0, -3, 4, 1, -2, 65531, 1, -2, 65532, 0, -2, 65533, 1, -2, 65534, 0, -2, 65535, 1, -2, 0, 0, -2, 1, 1, -2, 2, 0, -2, 3, 1, -2, 4, 0, -1, 65531, 0, -1, 65532, 1, -1, 65533, 0, -1, 65534, 1, -1, 65535, 0, -1, 0, 1, -1, 1, 0, -1, 2, 1, -1, 3, 0, -1, 4, 1, -65536, 65531, 1, -65536, 65532, 0, -65536, 65533, 1, -65536, 65534, 0, -65536, 65535, 1, -65536, 0, 0, -65536, 1, 1, -65536, 2, 0, -65536, 3, 1, -65536, 4, 0, -65535, 65531, 0, -65535, 65532, 1, -65535, 65533, 0, -65535, 65534, 1, -65535, 65535, 0, -65535, 0, 1, -65535, 1, 0, -65535, 2, 1, -65535, 3, 0, -65535, 4, 1, -65534, 65531, 1, -65534, 65532, 0, -65534, 65533, 1, -65534, 65534, 0, -65534, 65535, 1, -65534, 0, 0, -65534, 1, 1, -65534, 2, 0, -65534, 3, 1, -65534, 4, 0, -65533, 65531, 0, -65533, 65532, 1, -65533, 65533, 0, -65533, 65534, 1, -65533, 65535, 0, -65533, 0, 1, -65533, 1, 0, -65533, 2, 1, -65533, 3, 0, -65533, 4, 1, -65532, 65531, 1, -65532, 65532, 0, -65532, 65533, 1, -65532, 65534, 0, -65532, 65535, 1, -65532, 0, 0, -65532, 1, 1, -65532, 2, 0, -65532, 3, 1, -65532, 4, 0)
+}
+
+[node name="player" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+
+[node name="orbit_camera" parent="." instance=ExtResource("2_camera")]
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+[node name="hint_label" type="Label" parent="hud"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Drag: orbit   Wheel: zoom   Esc: pause"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pause_menu" parent="." instance=ExtResource("3_pause")]

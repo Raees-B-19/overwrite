@@ -11,13 +11,15 @@ Must-follow rules for new and changed code. Godot 4.7, GDScript. Read with `PLAN
 | `scenes/player/` | `player.tscn` (the suit) and its module model scenes. |
 | `scenes/enemies/` | Machine enemy scenes, files prefixed `enemy_`. Variants are a recolour or rescale of one scene, not a new scene. |
 | `scenes/maps/` | `base_map.tscn` (script `scripts/maps/map.gd`) and mission maps inherited from it, e.g. `mission_01.tscn`. |
+| `scenes/camera/` | `orbit_camera.tscn`, the tactical orbit camera a map instances. |
 | `scenes/props/` | Static map pieces: cover, walls, crates. |
 | `scenes/effects/` | Visual feedback with no gameplay state: hit flashes, tile and range highlights. |
 | `scenes/menus/` | Menu scenes. `scenes/menus/sub_menus/` for panels used inside another menu. |
 | `scripts/` | Mirrors `scenes/`. `scripts/menus/pause_menu.gd` pairs with `scenes/menus/pause_menu.tscn`. |
 | `scripts/globals/` | Autoload scripts only. |
 | `scripts/lib/` | Scene-less scripts with no node of their own: grid, AP and damage rules, save file access, palette. Not autoloads. A script here has no paired `.tscn`. |
-| `assets/` | Models, textures, `assets/shaders/`. Do not edit `.import` or `.uid` files by hand. |
+| `assets/` | Models, textures, `assets/shaders/`, `ui_theme.tres` (the project default theme, all UI colours). Do not edit `.import` or `.uid` files by hand. |
+| `tests/` | Headless `*_test.gd` scripts extending `SceneTree`. Run with `godot --headless --path . --script res://tests/<name>.gd`; the exit code is the failure count. |
 | `docs/` | Design docs and this file. |
 
 - New kind of scene: new subfolder under `scenes/`, and a row here.
@@ -119,6 +121,7 @@ Implementation:
 - Setters are idempotent: return early when the value is unchanged.
 - Emit a signal after the state changes, not before.
 - Scene switch: a typed `preload("uid://...")` const, then `get_tree().change_scene_to_packed(...)`. Never `change_scene_to_file`.
+- A switch back to a scene that preloads this one (pause menu to main menu) uses a uid `String` const and `load()` at switch time. A preload cycle leaves the scene empty.
 - Damage goes through one `take_damage` method on the target.
 
 Stubs:

@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://deul0ocl6q85i"]
+
+[ext_resource type="Script" uid="uid://diro5wnmygk0f" path="res://scripts/menus/pause_menu.gd" id="1_script"]
+
+[node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_script")
+
+[node name="center_container" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="panel_container" type="PanelContainer" parent="center_container"]
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+
+[node name="v_box_container" type="VBoxContainer" parent="center_container/panel_container"]
+layout_mode = 2
+
+[node name="title_label" type="Label" parent="center_container/panel_container/v_box_container"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="resume_button" type="Button" parent="center_container/panel_container/v_box_container"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Resume"
+
+[node name="main_menu_button" type="Button" parent="center_container/panel_container/v_box_container"]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="center_container/panel_container/v_box_container/resume_button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="center_container/panel_container/v_box_container/main_menu_button" to="." method="_on_main_menu_button_pressed"]

@@ -1,0 +1,59 @@
+[gd_resource type="Theme" format=3 uid="uid://cu16dxdqu8mq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.15, 0.85, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(0.14, 0.56, 0.56, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+bg_color = Color(0.165, 0.222, 0.275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 100.0
+content_margin_top = 30.0
+content_margin_right = 100.0
+content_margin_bottom = 50.0
+bg_color = Color(0.084, 0.113, 0.156, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[resource]
+default_font_size = 32
+Button/colors/font_color = Color(0.904, 0.936, 0.936, 1)
+Button/colors/font_focus_color = Color(0.904, 0.936, 0.936, 1)
+Button/colors/font_hover_color = Color(0.904, 0.936, 0.936, 1)
+Button/colors/font_hover_pressed_color = Color(0.904, 0.936, 0.936, 1)
+Button/colors/font_pressed_color = Color(0.904, 0.936, 0.936, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_button_focus")
+Button/styles/hover = SubResource("StyleBoxFlat_button_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_button")
+Button/styles/pressed = SubResource("StyleBoxFlat_button_hover")
+Label/colors/font_color = Color(0.904, 0.936, 0.936, 1)
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel")
+TitleLabel/base_type = &"Label"
+TitleLabel/font_sizes/font_size = 72
+VBoxContainer/constants/separation = 20
